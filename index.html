@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo List</title>
+  <style>
+.todo-item {
+  display: flex;
+  justify-content: space-between; /* Align text to the left and buttons to the right */
+  margin: 5px 0;
+  align-items: center; /* Center the content vertically */
+  border-bottom: 1px solid #ddd; /* Add a separator line between items */
+  overflow: hidden; /* Hide any content that overflows the item */
+  max-width: 100%; /* Ensure it doesn't exceed the container width */
+}
+
+.todo-item span {
+  flex: 1; /* Allow the text to take up remaining space */
+  overflow: hidden;
+  white-space: nowrap; /* Prevent text from wrapping onto the next line */
+  text-overflow: ellipsis; /* Show "..." for overflowed text */
+  padding-right: 10px; /* Add padding so the text doesn't touch the button */
+}
+
+.completed {
+  text-decoration: line-through;
+  color: gray;
+}
+
+.todo-container {
+  position: absolute;
+  top: 30px; /* Keeps the top position fixed */
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 500px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f4f4f4;
+  overflow: hidden; /* Prevents any overflow outside the container */
+}
+
+#todo-input,
+#add-btn {
+  margin-bottom: 10px;
+}
+
+#todo-list {
+  max-height: 200px; /* Define how much space the list can take */
+  overflow-y: auto; /* Enable vertical scrolling for the list */
+  border-top: 1px solid #ddd; /* Optional: separates the input section from the list visually */
+  padding-top: 10px; /* Add some space for the list content */
+}
+
+    /* Basic styling */
+    .todo-container {
+      width: 300px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background-color: #f4f4f4;
+    }
+    input[type="text"] {
+      width: 80%;
+      padding: 5px;
+      margin-bottom: 10px;
+    }
+    button {
+      padding: 5px 10px;
+      margin: 5px;
+    }
+    .todo-item {
+      display: flex;
+      justify-content: space-between; /* Align text to the left and buttons to the right */
+      margin: 5px 0;
+      align-items: center; /* Center the content vertically */
+      border-bottom: 1px solid #ddd; /* Add a separator line between items */
+      overflow: hidden; /* Hide any content that overflows the item */
+      max-width: 100%; /* Ensure it doesn't exceed the container width */
+    }
+    .todo-item span {
+      flex: 1; /* Allow the text to take up remaining space */
+      overflow: hidden;
+      white-space: nowrap; /* Prevent text from wrapping onto the next line */
+      text-overflow: ellipsis; /* Show "..." for overflowed text */
+      padding-right: 10px; /* Add padding so the text doesn't touch the button */
+    }
+    .completed {
+      text-decoration: line-through;
+      color: gray;
+    }
+    /* Styling for buttons */
+    .todo-item button {
+      margin-left: 5px;
+    }
+
+ /********* codepen *********/
+ body {
+  /* background-color: #030303; */
+ background-image: url(wallpaper.jpg);
+}
+
+/* Basisstijl voor het SVG-element */
+svg {
+  position: absolute;
+  top: 72%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: auto;
+  background-color: rgba(0, 0, 0, 0.39);
+
+}
+
+/* Tekststijl: vul met patroon, en gebruik dikkere stroke */
+text {
+  fill: url(#imagePattern);
+  font-family: "Protest Guerrilla", sans-serif;
+  font-size: 150px;
+  letter-spacing: 5px;
+  stroke: rgb(0, 238, 255);
+  stroke-width: 1px;
+  stroke-dasharray: 500;
+  stroke-dashoffset: 500;
+  filter: url(#glowFilter); /* Voeg gloedfilter toe */
+  background-color: rgb(31, 151, 27);
+}
+
+
+
+  </style>
+</head>
+<body>
+ 
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Protest+Guerrilla&display=swap" rel="stylesheet">
+  <svg viewBox="0 0 800 200">
+    <!-- Definieer een patroon voor de tekst -->
+    <defs>
+      <pattern id="imagePattern" patternUnits="userSpaceOnUse" width="400" height="400">
+        <image href="https://iili.io/20FHSCN.png" x="0" y="0" width="400" height="400" />
+      </pattern>
+  
+      <!-- Definieer gloedfilter -->
+      <filter id="glowFilter" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="8" result="blurred" />
+        <feOffset in="blurred" dx="0" dy="0" result="offsetBlurred" />
+        <feFlood flood-color="cyan" result="glowColor" />
+        <feComposite in="glowColor" in2="offsetBlurred" operator="in" />
+        <feMerge>
+          <feMergeNode />
+          <feMergeNode in="SourceGraphic" />
+        </feMerge>
+      </filter>
+    </defs>
+  
+    <!-- Tekst waarop het patroon en de gloed worden toegepast -->
+    <text id="animatedText" x="50" y="150">Todo List</text>
+  </svg>
+
+
+
+  <div class="todo-container">
+    <h2>Todo List</h2>
+    <input type="text" id="todo-input" placeholder="Add new todo">
+    <button id="add-btn">Add</button>
+
+    <ul id="todo-list"></ul>
+  </div>
+
+  <!-- Linking the JavaScript file -->
+  <script src="todo.js"></script>
+</body>
+</html>
